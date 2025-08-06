@@ -7,6 +7,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import LoginPage from "@/pages/LoginPage";
+import RegisterResidentPage from "@/pages/RegisterResidentPage";
+import RegisterSocietyPage from "@/pages/RegisterSocietyPage";
 import Dashboard from "@/pages/Dashboard";
 import UnauthorizedPage from "@/pages/UnauthorizedPage";
 import NotFound from "@/pages/NotFound";
@@ -23,6 +25,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register/resident" element={<RegisterResidentPage />} />
+            <Route path="/register/society" element={<RegisterSocietyPage />} />
             <Route path="/unauthorized" element={<UnauthorizedPage />} />
             
             {/* Protected Dashboard Routes */}
