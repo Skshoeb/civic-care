@@ -10,8 +10,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Building2, ArrowLeft, Building, MapPin, User, Mail, Phone, Lock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import type { RegisterSocietyData } from '@/types/auth';
-
 const registerSocietySchema = z.object({
   // Society Details
   societyName: z.string().min(2, 'Society name must be at least 2 characters'),
@@ -32,14 +30,14 @@ const registerSocietySchema = z.object({
   path: ["confirmAdminPassword"],
 });
 
-type RegisterSocietyForm = z.infer<typeof registerSocietySchema>;
+// RegisterSocietyForm type is inferred from the schema
 
 const RegisterSocietyPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const form = useForm<RegisterSocietyForm>({
+  const form = useForm({
     resolver: zodResolver(registerSocietySchema),
     defaultValues: {
       societyName: '',
@@ -56,12 +54,12 @@ const RegisterSocietyPage = () => {
     },
   });
 
-  const onSubmit = async (data: RegisterSocietyForm) => {
+  const onSubmit = async (data) => {
     setIsLoading(true);
     
     try {
       // Convert form data to API format
-      const registrationData: RegisterSocietyData = {
+      const registrationData = {
         societyName: data.societyName,
         address: data.address,
         city: data.city,
