@@ -1,7 +1,6 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User, AuthContextType, LoginCredentials } from '@/types/auth';
+import { createContext, useContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -11,12 +10,8 @@ export const useAuth = () => {
   return context;
 };
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -35,12 +30,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email, password) => {
     setIsLoading(true);
     try {
       // TODO: Replace with actual API call
       // For now, mock login based on email pattern
-      let mockUser: User;
+      let mockUser;
       
       if (email.includes('superadmin')) {
         mockUser = {

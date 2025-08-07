@@ -10,8 +10,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Building2, ArrowLeft, User, Mail, Phone, Lock, Home, Building } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import type { RegisterResidentData } from '@/types/auth';
-
 const registerResidentSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
@@ -25,7 +23,7 @@ const registerResidentSchema = z.object({
   path: ["confirmPassword"],
 });
 
-type RegisterResidentForm = z.infer<typeof registerResidentSchema>;
+// RegisterResidentForm type is inferred from the schema
 
 // Mock societies data - replace with actual API call
 const mockSocieties = [
@@ -40,7 +38,7 @@ const RegisterResidentPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const form = useForm<RegisterResidentForm>({
+  const form = useForm({
     resolver: zodResolver(registerResidentSchema),
     defaultValues: {
       name: '',
@@ -53,12 +51,12 @@ const RegisterResidentPage = () => {
     },
   });
 
-  const onSubmit = async (data: RegisterResidentForm) => {
+  const onSubmit = async (data) => {
     setIsLoading(true);
     
     try {
       // Convert form data to API format
-      const registrationData: RegisterResidentData = {
+      const registrationData = {
         name: data.name,
         email: data.email,
         phone: data.phone,

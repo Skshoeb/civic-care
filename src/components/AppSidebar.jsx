@@ -37,7 +37,7 @@ import {
   UserCog,
 } from "lucide-react";
 
-const getMenuItems = (role: string) => {
+const getMenuItems = (role) => {
   switch (role) {
     case 'super_admin':
       return [
@@ -98,11 +98,11 @@ export function AppSidebar() {
   if (!user) return null;
 
   const menuItems = getMenuItems(user.role);
-  const isActive = (path: string) => currentPath === path;
-  const getNavCls = ({ isActive }: { isActive: boolean }) =>
+  const isActive = (path) => currentPath === path;
+  const getNavCls = ({ isActive }) =>
     isActive ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" : "hover:bg-sidebar-accent/50";
 
-  const getRoleDisplayName = (role: string) => {
+  const getRoleDisplayName = (role) => {
     switch (role) {
       case 'super_admin': return 'Super Admin';
       case 'admin': return 'Admin';

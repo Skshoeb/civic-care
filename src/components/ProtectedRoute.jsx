@@ -1,13 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { UserRole } from '@/types/auth';
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-  allowedRoles?: UserRole[];
-}
-
-const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {

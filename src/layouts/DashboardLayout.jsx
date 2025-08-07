@@ -1,11 +1,7 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 
-interface DashboardLayoutProps {
-  children: React.ReactNode;
-}
-
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = ({ children }) => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
